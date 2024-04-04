@@ -2,7 +2,7 @@
 
 In the world of cybersecurity, staying ahead of potential threats is paramount. Understanding the tools and techniques used in security monitoring and incident response is crucial for safeguarding systems and data against malicious actors. In this blog post, I will provide a walk through outlining how I set up a home lab using Elastic SIEM and a Kali VM, which enabled me to gain hands-on experience with security monitoring and incident detection.
 
-![Kali Linux Logo](./images/kali-logo.png)
+(./images/kali-logo.png)
 
 ## Setting Up Elastic SIEM
 
