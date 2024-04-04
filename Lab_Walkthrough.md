@@ -34,36 +34,55 @@ To create a new virtual machine you can use the following steps:
 Next, we must set up an agent. An agent refers to a software application installed on a device, such as a server or endpoint, with the purpose of gathering and transmitting data to a centralized system for analysis and monitoring. Within the realm of Elastic SIEM, an agent serves as a mechanism for retrieving and relaying security-related events from endpoints to the Elastic SIEM instance. To configure the agent for collecting logs from your Kali VM and transmitting them to your Elastic SIEM instance, adhere to the following steps:
 
 1. Access your Elastic SIEM instance by logging in and proceeding to the Integrations page. You can do this by clicking on the hamburger menu bar located at the top left corner of the interface. From there, select “Add Integrations” whic is located at the bottom of the menu.
-![Kali Linux Logo](./kali-logo.png)
+![Add Integrations](./images/add-integrations.png)
 2. Locate “Elastic Defend” and select it to access the integration page. Proceed to click on “Install Elastic Defend” and adhere to the instructions outlined on the integration page to install the agent on your Kali VM.
-3. Select ‘Add Elastic Agents to your hosts’ and paste in the provided command to your Kali Linux terminal.
+![Elastic Defend](./images/elastic-defend.png)
+3. Select ‘Add Elastic Agents to your hosts’ and paste in the following command to you Kali Linux terminal.
+![Install Code](./images/install-code.png)
 4. The installation could take a few minutes, but once it is complete you will see a command that says “Elastic Agent has been successfully installed.” The agent will now commence collecting and transmitting logs to your Elastic SIEM instance automatically.
+![Successful Install](./images/successful-install.png)
 
 ## Generating Security Events
 
 You can now generate some security events on your Kali VM by running an Nmap scan. Nmap is a freely available open-source tool utilized extensively for network exploration, administration, and security assessment purposes. Its primary function revolves around uncovering hosts and services within a computer network, essentially crafting a comprehensive “map” of the network landscape. Nmap’s capabilities extend to scanning hosts to identify accessible ports, discerning the operating system and software running on target systems, and procuring additional network-related information.
 
-You can run an Nmap scan on your Kali machine by opening up the terminal and entering some of the following commands: 
+You can run an Nmap scan on your Kali machine by opening up the terminal and entering some of the following commands:
 
 - `nmap -p- localhost`
 - `sudo nmap <vm-ip>`
 - `nmap -sS <ip address>`
 - `nmap -sT <ip address>`
 
+![Nmap Scan](./images/nmap-scan1.png)
+![Nmap Scan](./images/nmap-scan2.png)
+
 ## Querying and Analyzing Logs
 
-Now that we have forwarded data from the Kali VM to the SIEM, we can start querying and analyzing the logs in the SIEM. To do this:
+Now that we have forwarded data from the Kali VM to the SIEM, we can start querying and analyzing the logs in the SIEM. To do this, click on the hamburger menu icon at the top-left and then under “Observability” select “Logs”.
 
-1. Click on the hamburger menu icon at the top-left and then under “Observability” select “Logs”.
-2. In the search bar, search for all logs related to Nmap scans by entering the following query: `process.args: “nmap_scan”`.
-3. The results of the search query will be displayed in the table. You can click on the three dots next to each event to view more details. By generating and scrutinizing various security events within Elastic SIEM, such as the one described above, you can enhance your comprehension of the detection, investigation, and response processes to security incidents in real-world scenarios.
+![Logs View](./images/logs-view-elastic.png)
+
+Next, in the search bar, search for all logs related to Nmap scans by entering the following query: process.args: “nmap_scan”. The results of the search query will be displayed in the table. You can click on the three dots next to each event to view more details. By generating and scrutinizing various security events within Elastic SIEM, such as the one described above, you can enhance your comprehension of the detection, investigation, and response processes to security incidents in real-world scenarios.
 
 ## Creating Visualizations and Alerts
 
-1. Click on the hamburger icon and select “Dashboards” under the “Analytics” section to create a new dashboard.
-2. Click “Create dashboard” and then on the “Create Visualization” button to add a new visualization to the dashboard. Select “Bar chart” as the visualization type. For the Metrics section, select “Count” for the vertical field type and “Timestamp” for the horizontal field type. Click ‘Save’ to complete the visualization.
-3. Next, click on “Alerts” under the “Security” section to create an alert. Click on “Manage Rules” and then “Create new rule”. Under the “Define rule” section, select the “Custom query” option and set the conditions for the rule (e.g., `event.action: “nmap_scan”`). Give your rule a name, description, and fill out the other relevant information required to help prioritize your alerts based on significance. Then click “Continue”.
-4. In the “Actions” section, select the actions to be taken when an alert is triggered. Options include sending an email, Slack message, creating a Jira ticket, or triggering a custom webhook. Finally, select “Create and enable rule” to create the alert.
+Now, we will create a dashboard to visualize and analyze the log data more efficiently. We do this by once again clicking on the hamburger icon and selecting “Dashboards” under the “Analytics” section.
+
+![Dashboard Menu](./images/dashboards-elastic.png)
+
+ Click “Create dashboard” to create a new dashboard. Next, click on the “Create Visualization” button to add a new visualization to the dashboard. We can select “Bar chart” as the visualization type. For the Metrics section, we can select “Count” for the vertical field type and “Timestamp” for the horizontal field type. Now click ‘Save’ to complete the visualization. Here is an example of what mine looked like after running multiple nmap scans prior to creating it.
+
+![Dashboard Visual](./images/dashboard-visual.png)
+
+Now we can create an alert. Within a SIEM, alerts play a pivotal role in the identification and prompt response to security incidents. These alerts are formulated using predefined rules or customized queries and can be tailored to initiate specific actions upon meeting designated criteria. To create an alert, click on the hamburger icon then select “Alerts” under the “Security” section.
+
+![Add Alerts](./images/alerts-elastic.png)
+
+Next click on “Manage Rules” at the top right of the screen. Click on the “Create new rule” button at the top right. Under the “Define rule” section, select the “Custom query” option from the dropdown menu. Under “Custom query”, set the conditions for the rule. We will use the following query: event.action: “nmap_scan”. This will trigger an alert whenever an Nmap scan is run on the target machine, which in our case is our Kali VM. Give your rule a name and description as well as fill out the other relevant information required to help prioritize your alerts based on significance. Then click “Continue”.
+
+In the “Actions” section you can chose a variety of actions to be taken when an alert is triggered. I decided to go with email, but some other options include sending a Slack message, creating a Jira ticket, or triggering a custom webhook. Now we can finally select “Create and enable rule” to create the alert.
+
+![Alert Preview](./images/alert-preview.png)
 
 ## Conclusion
 
