@@ -35,10 +35,13 @@ Next, we must set up an agent. An agent refers to a software application install
 
 1. Access your Elastic SIEM instance by logging in and proceeding to the Integrations page. You can do this by clicking on the hamburger menu bar located at the top left corner of the interface. From there, select “Add Integrations” whic is located at the bottom of the menu.
 ![Add Integrations](./images/add-integrations.png)
+
 2. Locate “Elastic Defend” and select it to access the integration page. Proceed to click on “Install Elastic Defend” and adhere to the instructions outlined on the integration page to install the agent on your Kali VM.
 ![Elastic Defend](./images/elastic-defend.png)
+
 3. Select ‘Add Elastic Agents to your hosts’ and paste in the following command to you Kali Linux terminal.
 ![Install Code](./images/install-code.png)
+
 4. The installation could take a few minutes, but once it is complete you will see a command that says “Elastic Agent has been successfully installed.” The agent will now commence collecting and transmitting logs to your Elastic SIEM instance automatically.
 ![Successful Install](./images/successful-install.png)
 
