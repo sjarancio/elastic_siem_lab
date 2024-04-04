@@ -1,30 +1,31 @@
 # Setting Up a Home Lab for Cybersecurity Training with Elastic SIEM and Kali Linux
 
-In the world of cybersecurity, staying ahead of potential threats is paramount. Understanding the tools and techniques used in security monitoring and incident response is crucial for safeguarding systems and data against malicious actors. In this blog post, I will provide a walk-through outlining how I set up a home lab using Elastic SIEM and a Kali VM, which enabled me to gain hands-on experience with security monitoring and incident detection.
+In the world of cybersecurity, staying ahead of potential threats is paramount. Understanding the tools and techniques used in security monitoring and incident response is crucial for safeguarding systems and data against malicious actors. In this blog post, I will provide a walk through outlining how I set up a home lab using Elastic SIEM and a Kali VM, which enabled me to gain hands-on experience with security monitoring and incident detection.
 
 ![Kali Linux Logo](./images/kali-logo.png)
 
 ## Setting Up Elastic SIEM
 
-To start, it’s essential to create a free Elastic account to deploy a cloud-based Elastic instance for running the SIEM. You can do this by navigating to [Elastic Cloud](https://cloud.elastic.co/registration). Upon logging in, locate and click on the “Start your free trial” option. Next, select the “Create Deployment” button, and opt for “Elasticsearch” as the deployment type. Choose a region and deployment size that aligns with your requirements, and proceed by clicking on the “Create Deployment” button. Once the deployment setup is finalized, click on “continue” to proceed with the next steps.
+To start, it’s essential to create a free Elastic account to deploy a cloud-based Elastic instance for running the SIEM. You can do this by navigating to https://cloud.elastic.co/registration. Upon logging in, locate and click on the “Start your free trial” option. Next, select the “Create Deployment” button, and opt for “Elasticsearch” as the deployment type. Choose a region and deployment size that aligns with your requirements, and proceed by clicking on the “Create Deployment” button. Once the deployment setup is finalized, click on “continue” to proceed with the next steps.
 
 ## Setting Up Kali Linux VM
 
-The next step is setting up your Kali VM. For this, I used Oracle VirtualBox. Once VirtualBox is downloaded and set up on your machine, you can proceed with downloading the Kali Linux ISO image from the official Kali website. Choose the appropriate version based on your system architecture (32-bit or 64-bit).
+The next step is setting up your Kali VM. For this I used Oracle VirtualBox. Once VirtualBox is downloaded and set up on your machine you can proceed with downloading the Kali Linux ISO image from the official Kali website. Choose the appropriate version based on your system architecture (32-bit or 64-bit).
 
-To create a new virtual machine:
+To create a new virtual machine you can use the following steps:
 
 1. Launch VirtualBox and click on the “New” button in the toolbar.
 2. Enter a name for your virtual machine (ex. “Kali”) and select the type as “Linux” and the version as “Debian (64-bit)”.
-3. Allocate memory (RAM) to the virtual machine. A minimum of 2 GB is recommended for Kali Linux.
+3. Allocate memory (RAM) to the virtual machine. A minimum of 2 GB is *recommended* for Kali Linux.
 4. Create a virtual hard disk now and choose the default options for the hard disk file type and storage allocation.
 5. Choose the hard disk file type. The default option (VDI) should suffice for most users.
 6. Select “Dynamically allocated” for the storage on physical hard disk. This allows the virtual disk file to grow as needed.
 7. Specify the size of the virtual hard disk. A minimum of 20 GB is recommended for installing Kali Linux.
 8. Click “Create” to create the virtual machine.
 9. Start the virtual machine by clicking on the “Start” button in VirtualBox.
-
-Follow the on-screen instructions to install Kali Linux on the virtual hard disk. Once the installation is complete, reboot the virtual machine and log in to your new Kali Linux environment.
+10. The Kali Linux installer should boot from the ISO image. Follow the on-screen instructions to install Kali Linux on the virtual hard disk.
+11. During the installation process, you will be prompted to configure various settings such as language, location, keyboard layout, and disk partitioning. Follow the prompts and choose the appropriate options.
+12. Once the installation is complete, reboot the virtual machine and log in to your new Kali Linux environment.
 
 **Note:** If you are only using this VM for this lab, the recommended RAM and CPU requirements may be able to be lessened a bit.
 
@@ -32,7 +33,7 @@ Follow the on-screen instructions to install Kali Linux on the virtual hard disk
 
 Next, we must set up an agent. An agent refers to a software application installed on a device, such as a server or endpoint, with the purpose of gathering and transmitting data to a centralized system for analysis and monitoring. Within the realm of Elastic SIEM, an agent serves as a mechanism for retrieving and relaying security-related events from endpoints to the Elastic SIEM instance. To configure the agent for collecting logs from your Kali VM and transmitting them to your Elastic SIEM instance, adhere to the following steps:
 
-1. Access your Elastic SIEM instance by logging in and proceeding to the Integrations page. You can do this by clicking on the hamburger menu bar located at the top left corner of the interface. From there, select “Add Integrations” which is located at the bottom of the menu.
+1. Access your Elastic SIEM instance by logging in and proceeding to the Integrations page. You can do this by clicking on the hamburger menu bar located at the top left corner of the interface. From there, select “Add Integrations” whic is located at the bottom of the menu.
 ![Kali Linux Logo](./kali-logo.png)
 2. Locate “Elastic Defend” and select it to access the integration page. Proceed to click on “Install Elastic Defend” and adhere to the instructions outlined on the integration page to install the agent on your Kali VM.
 3. Select ‘Add Elastic Agents to your hosts’ and paste in the provided command to your Kali Linux terminal.
